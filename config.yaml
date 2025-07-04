@@ -1,0 +1,34 @@
+# Basic project settings
+# Future steps: Add parser URL, database config, JWT secrets, Redis config
+
+server:
+  port: "8080"
+  # Future server config:
+  # host: "localhost"
+  # read_timeout: 30
+  # write_timeout: 30
+
+# Future configuration sections:
+# database:
+#   host: "localhost"
+#   port: 5432
+#   user: "easypars"
+#   password: "password"
+#   dbname: "easypars_db"
+#   sslmode: "disable"
+
+# parser:
+#   base_url: "https://vringe.com/results/"
+#   rate_limit: 5
+#   timeout: 30
+#   concurrent_workers: 3
+
+# jwt:
+#   secret: "your-secret-key"
+#   expire_hours: 24
+
+# redis:
+#   host: "localhost"
+#   port: 6379
+#   password: ""
+#   db: 0

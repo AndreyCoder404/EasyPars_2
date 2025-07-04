@@ -1,0 +1,96 @@
+/* Styles for the frontend */
+/* Future steps: Add comprehensive CSS for table styling, responsive design, and animations */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Future styles to be added:
+- Responsive table design
+- Dark mode support
+- Loading animations
+- Button hover effects
+- Form styling
+- Mobile-first design
+- Color themes
+*/
+
+.controls {
+    margin-bottom: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.fights-table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.fights-table th,
+.fights-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.fights-table th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    display: none;
+}
+
+.pagination {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+}

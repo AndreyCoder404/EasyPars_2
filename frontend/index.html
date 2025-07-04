@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyPars - Fight Parser</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main frontend page to display fights -->
+    <div class="container">
+        <header>
+            <h1>EasyPars Fights</h1>
+            <p>Boxing and MMA Fight Results Parser</p>
+        </header>
+        
+        <main>
+            <!-- Controls section -->
+            <!-- Future steps: Add search, filter, and pagination controls -->
+            <div class="controls">
+                <button id="refreshBtn">Refresh Data</button>
+                <input type="text" id="searchInput" placeholder="Search fighters...">
+                <select id="filterSelect">
+                    <option value="">All Fights</option>
+                    <option value="ko">KO/TKO</option>
+                    <option value="decision">Decision</option>
+                </select>
+            </div>
+            
+            <!-- Loading indicator -->
+            <div id="loading" class="loading">Loading fights...</div>
+            
+            <!-- Fights table -->
+            <table id="fights" class="fights-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Fighter 1</th>
+                        <th>Fighter 2</th>
+                        <th>Result</th>
+                        <th>Location</th>
+                        <th>Round</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="fightsBody">
+                    <!-- Fight data will be populated here by JavaScript -->
+                </tbody>
+            </table>
+            
+            <!-- Pagination -->
+            <!-- Future steps: Add pagination controls -->
+            <div class="pagination">
+                <button id="prevBtn">Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextBtn">Next</button>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 EasyPars - Fight Data Parser</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

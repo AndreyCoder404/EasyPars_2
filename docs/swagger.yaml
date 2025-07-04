@@ -1,0 +1,38 @@
+# Future API documentation with Swagger
+# This will contain OpenAPI specification for the EasyPars API
+
+openapi: 3.0.0
+info:
+  title: EasyPars API
+  description: REST API for boxing and MMA fight data parsing
+  version: 1.0.0
+  contact:
+    name: EasyPars Team
+    email: contact@easypars.com
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+
+# Future paths to be documented:
+# /api/health
+# /api/fights
+# /api/fights/{id}
+# /api/fighters
+# /api/fighters/{id}
+# /api/auth/login
+# /api/auth/register
+
+paths:
+  /api/health:
+    get:
+      summary: Health check endpoint
+      responses:
+        '200':
+          description: Service is healthy
+
+# Future components:
+# - Fight schema
+# - Fighter schema
+# - Error response schema
+# - Authentication schema

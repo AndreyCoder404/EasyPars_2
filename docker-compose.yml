@@ -1,0 +1,35 @@
+# Future Docker Compose configuration
+version: '3.8'
+
+services:
+  easypars:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_HOST=postgres
+      - REDIS_HOST=redis
+    volumes:
+      - ./config.yaml:/app/config.yaml
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=easypars_db
+      - POSTGRES_USER=easypars
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
