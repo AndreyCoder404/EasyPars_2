@@ -2,7 +2,7 @@
 
 ## Fight Parser
 
-A Go program for parsing boxing and MMA fight data from https://vringe.com/results/ with REST API and frontend interface.
+A Go program for parsing boxing and MMA fight data from -- with REST API and frontend interface.
 
 ### Description
 
@@ -10,7 +10,7 @@ EasyPars is a comprehensive fight data parsing application that extracts boxing 
 
 ### Features
 
-- **Data Parsing**: Extracts fight data from vringe.com/results/
+- **Data Parsing**: Extracts fight data from ===
 - **REST API**: Provides JSON endpoints for accessing fight data
 - **Web Interface**: Simple frontend to view and search fights
 - **Extensible**: Designed for future enhancements
