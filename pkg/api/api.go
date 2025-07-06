@@ -1,8 +1,11 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
+	"easypars/pkg/parser"
+	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // SetupRouter configures and returns the Gin router with all API endpoints
@@ -34,7 +37,7 @@ func SetupRouter() *gin.Engine {
 		// Future steps: Add database health check, system status
 		api.GET("/health", handleHealth)
 
-		// Fights endpoint - main functionality
+		// Fights endpoint - main functionality with real parser integration
 		// Future steps: Add pagination, filtering, search capabilities
 		api.GET("/fights", handleGetFights)
 
@@ -66,51 +69,62 @@ func handleHealth(c *gin.Context) {
 	})
 }
 
-// handleGetFights handles GET requests for fight data
-// Returns a list of fights (currently hardcoded)
+// handleGetFights handles GET requests for fight data using the real parser
+// Integrates with the parser to fetch live data from vringe.com
 func handleGetFights(c *gin.Context) {
-	// Future steps:
-	// 1. Integrate with parser to get real data
-	// 2. Add database queries using GORM
-	// 3. Implement pagination with query parameters
-	// 4. Add filtering by date, fighter, location
-	// 5. Add caching for performance
+	log.Println("Received request for fight data, initializing parser")
 
-	// Mock data for initial testing
-	fights := []map[string]interface{}{
-		{
-			"id":       1,
-			"date":     "2024-01-15",
-			"fighter1": "John Doe",
-			"fighter2": "Jane Smith",
-			"result":   "John Doe wins by KO",
-			"location": "Las Vegas, NV",
-			"round":    3,
-			"time":     "2:45",
-		},
-		{
-			"id":       2,
-			"date":     "2024-01-20",
-			"fighter1": "Mike Johnson",
-			"fighter2": "Sarah Connor",
-			"result":   "Sarah Connor wins by Decision",
-			"location": "New York, NY",
-			"round":    5,
-			"time":     "5:00",
-		},
+	// Create a new parser instance with the target URL
+	// Using hardcoded URL as specified in requirements
+	parserInstance := parser.NewParser("https://vringe.com/results/")
+
+	// Call ParseFights to get real data from the website
+	// This performs HTTP request, HTML parsing, and concurrent processing
+	fights, err := parserInstance.ParseFights()
+	if err != nil {
+		// Log the error for debugging
+		log.Printf("Error parsing fights: %v", err)
+
+		// Return appropriate HTTP error response
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to parse fight data",
+			"message": "Unable to retrieve fight information at this time",
+			"details": err.Error(),
+		})
+		return
 	}
 
+	// Check if we got any results
+	if len(fights) == 0 {
+		log.Println("No fight data found, returning empty result")
+		c.JSON(http.StatusOK, gin.H{
+			"message": "No fight data available",
+			"data":    []interface{}{},
+			"count":   0,
+		})
+		return
+	}
+
+	// Log successful response
+	log.Printf("Successfully retrieved %d fights from parser", len(fights))
+
+	// Return successful response with parsed fight data
 	c.JSON(http.StatusOK, gin.H{
-		"message": "List of fights retrieved successfully",
+		"message": "Fight data retrieved successfully from vringe.com",
 		"data":    fights,
 		"count":   len(fights),
+		"source":  "vringe.com/results/",
 	})
-}
 
-// Future functions to be implemented:
-// - JWT authentication middleware
-// - Input validation functions
-// - Error handling middleware
-// - Rate limiting middleware
-// - Logging middleware
-// - Database connection functions
+	// Future steps:
+	// 1. Add caching to reduce load on target website
+	// 2. Implement pagination with query parameters (?page=1&limit=10)
+	// 3. Add filtering by date range (?from=2024-01-01&to=2024-12-31)
+	// 4. Add search functionality (?search=fighter_name)
+	// 5. Add sorting options (?sort=date&order=desc)
+	// 6. Store parsed data in database for faster subsequent requests
+	// 7. Add rate limiting to prevent abuse
+	// 8. Add request timeout handling
+	// 9. Add data validation and sanitization
+	// 10. Add metrics and monitoring for parsing performance
+}
